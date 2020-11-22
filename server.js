@@ -1,6 +1,7 @@
 const express = require("express");
 const axios = require("axios");
 const bodyParser = require("body-parser");
+const { users } = require("./src/endpoints");
 const app = express();
 const port = 3000;
 
@@ -15,50 +16,30 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
 app.use(bodyParser.json());
 
-app.get("/", async (req, res) => {
-  const { data } = await axios.get(
-    "https://jsonplaceholder.typicode.com/users"
-  );
-  // 200 OK
-  res.status(200).send(data);
-});
+// inyección de dependencias
+// le pasamos los servicios
+// es una fora elegante de decir que vamos a pasar un argumento
+// vamos a inyectar axios a users
+// vamos a ejecutar a users
+// dentro de un objeto le pasamos axios a users
+// asi no tenemos que hacer un require de las dependencias
 
+// de esta forma podemos cuando hagamos pruebas
+// vamos ainyectar axios y no tenemos que hacer un llamado real
+
+const usersHandlers = users({ axios });
+
+// cada ruta tiene este handler
+// handler o controller
+
+// GET
+app.get("/", usersHandlers.get);
 // POST
-app.post("/", async (req, res) => {
-  const { body } = req;
-  const { data } = await axios.post(
-    "https://jsonplaceholder.typicode.com/users",
-    body
-  );
-  // res.sendStatus(200);
-  // en req.body se encuentra toda la info
-  // 201 creado
-  res.status(200).send(data);
-});
-
+app.post("/", usersHandlers.post);
 // PUT
-app.put("/:id", async (req, res) => {
-  const { body } = req;
-  const { id } = req.params;
-  console.log(body);
-  await axios
-    .put(`https://jsonplaceholder.typicode.com/users${id}`, body)
-    .catch(() => {});
-  // 204 sin contenido
-  // res.status(204).send(data);
-  res.sendStatus(204);
-});
-
+app.put("/:id", usersHandlers.put);
 // DELETE
-app.delete("/:id", async (req, res) => {
-  const { id } = req.params;
-  await axios
-    .delete(`https://jsonplaceholder.typicode.com/users${id}`)
-    .catch(() => {});
-
-  // 204 sin contenido
-  res.sendStatus(204);
-});
+app.delete("/:id", usersHandlers.delete);
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
