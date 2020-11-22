@@ -15,11 +15,13 @@ Implementa los dos anteriores pero antes de ejecutar la funcion yo le puedo deci
 La lógica la vamos a llevar a un modulo
 
 ## inyección de dependencias
-Vamos a inyectarle un mock a la libreria de axios (es una frase nobita para decirle a una funcion que le voy a pasar un argumento)
+Vamos a inyectarle un mock a la libreria de axios (es una frase bonita para decirle a una funcion que le voy a pasar un argumento)
+
+Por medio de inyección de dependencias podemos insertar servicios como axios
 
 # TESTS DE INTEGRACIÓN
 
-Vamos allamar al API o URL
+Vamos a llamar al API o URL
 
 Esperamos que nos devuelva datos acorde
 
