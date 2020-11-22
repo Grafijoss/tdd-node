@@ -26,6 +26,31 @@ Vamos a llamar al API o URL
 Esperamos que nos devuelva datos acorde
 
 
+## scripts
+
+Creamos el script en el package.json
+
+```js
+	"scripts": {
+		"test": "jest"
+	}
+```
+
+Lo corremos con:
+
+```bash
+yarn test
+```
+
+Escuchamos los cambios con:
+
+```bash
+yarn test --watchAll
+```
+
+
+
+
 Use the package manager [pip](https://pip.pypa.io/en/stable/) to install foobar.
 
 ```bash
