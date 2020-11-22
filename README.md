@@ -46,7 +46,16 @@ Escuchamos los cambios con:
 
 ```bash
 yarn test --watchAll
+yarn test --watchAll
 ```
+
+Escuchamos los cambios en un solo archivo:
+
+```bash
+yarn test --watch - src\endpoints\users\index.spec.js
+```
+
+
 
 
 
