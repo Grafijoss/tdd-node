@@ -20,14 +20,13 @@ const handlesrs = ({ axios }) => ({
     // res.sendStatus(200);
     // en req.body se encuentra toda la info
     // 201 creado
-    res.status(200).send(data);
+    res.status(201).send(data);
   },
   put: async (req, res) => {
     const { body } = req;
     const { id } = req.params;
-    console.log(body);
     await axios
-      .put(`https://jsonplaceholder.typicode.com/users${id}`, body)
+      .put(`https://jsonplaceholder.typicode.com/users/${id}`, body)
       .catch(() => {});
     // 204 sin contenido
     // res.status(204).send(data);
@@ -36,7 +35,7 @@ const handlesrs = ({ axios }) => ({
   delete: async (req, res) => {
     const { id } = req.params;
     await axios
-      .delete(`https://jsonplaceholder.typicode.com/users${id}`)
+      .delete(`https://jsonplaceholder.typicode.com/users/${id}`)
       .catch(() => {});
 
     // 204 sin contenido
