@@ -1,7 +1,7 @@
 const express = require("express");
 const axios = require("axios");
 const bodyParser = require("body-parser");
-const { users } = require("./src/endpoints");
+const { posts } = require("./src/endpoints");
 const app = express();
 const port = 3000;
 
@@ -10,7 +10,7 @@ const port = 3000;
 // http://expressjs.com/en/resources/middleware/body-parser.html
 
 // parse application/x-www-form-urlencoded
-// inyecta ek request en el body
+// inyecta el request en el body
 app.use(bodyParser.urlencoded({ extended: false }));
 
 // parse application/json
@@ -27,19 +27,20 @@ app.use(bodyParser.json());
 // de esta forma podemos cuando hagamos pruebas
 // vamos ainyectar axios y no tenemos que hacer un llamado real
 
-const usersHandlers = users({ axios });
+const postsHandlers = users({ axios });
 
 // cada ruta tiene este handler
 // handler o controller
 
-// GET
-app.get("/", usersHandlers.get);
 // POST
-app.post("/", usersHandlers.post);
-// PUT
-app.put("/:id", usersHandlers.put);
-// DELETE
-app.delete("/:id", usersHandlers.delete);
+// vamos a necesitar un middleware
+// que se encargue de verificar que es para administradores (authenticate)
+// authenticate tmbien va a recibir un objeto de request
+// va a recibir un objeto de response
+// va a recibir como tercer argumento una funcion
+// cuando ejecutemos la funcion se ejecutara el siguiente middleware (postsHandlers.post)
+
+app.post("/", authenticate, postsHandlers.post);
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
