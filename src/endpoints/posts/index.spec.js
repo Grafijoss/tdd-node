@@ -24,9 +24,10 @@ describe("Endpoinmts", () => {
       };
 
       const res = {
-        status: jest.fn(),
+        status: jest.fn().mockReturnThis(),
         send: jest.fn(),
       };
+      // mockReturnThis return this = res
       const axios = {
         get: jest.fn().mockResolvedValue({
           data: mosckUsers,
@@ -41,13 +42,13 @@ describe("Endpoinmts", () => {
 
       expect(res.status.mock.calls).toEqual([[201]]);
 
-      expect(res.send.mocks.calls).toEqual([[{ id: 1000 }]]);
+      expect(res.send.mock.calls).toEqual([[{ id: 1000 }]]);
 
       expect(axios.get.mock.calls).toEqual([
         ["https://jsonplaceholder.typicode.com/users"],
       ]);
 
-      expect(axios.post.mock.call).toEqual([
+      expect(axios.post.mock.calls).toEqual([
         ["https://jsonplaceholder.typicode.com/posts", post],
       ]);
     });
