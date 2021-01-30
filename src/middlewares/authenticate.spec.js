@@ -22,7 +22,7 @@ describe("Middlewares", () => {
 
       // verificamos que headers se llamo y con qu e valor se llamo
       expect(req.header.mock.calls).toEqual([["user_id"]]);
-      // no quiero que se llame send status
+      // no quiero que se llame send status continua con el siguiente middlware
       expect(res.sendStatus.mock.calls).toEqual([]);
       // se llama una vez sin con un arreglo sin ningun argumento
       expect(next.mock.calls).toEqual([[]]);
