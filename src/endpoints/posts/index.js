@@ -1,13 +1,21 @@
-const { default: Axios } = require("axios");
-
 module.exports = ({ axios }) => ({
   post: async (req, res) => {
-    await axios.get("https://jsonplaceholder.typicode.com/users");
-    const { data } = await axios.post(
-      "https://jsonplaceholder.typicode.com/posts",
-      req.body
+    const { data: users } = await axios.get(
+      "https://jsonplaceholder.typicode.com/users"
     );
-    // data { id: 1000 }
-    res.status(201).send(data);
+    // console.log(users.find((x) => x.id === req.body.userId));
+    const found = users.find((x) => x.id === req.body.userId);
+
+    if (found) {
+      console.log("siii");
+      const { data } = await axios.post(
+        "https://jsonplaceholder.typicode.com/posts",
+        req.body
+      );
+      // data { id: 1000 }
+      return res.status(201).send(data);
+    }
+    console.log(res.sendStatus);
+    res.sendStatus(500);
   },
 });
