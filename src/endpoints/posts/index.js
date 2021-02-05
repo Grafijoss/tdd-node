@@ -8,7 +8,7 @@ module.exports = ({ axios }) => ({
     const found = users.find((x) => x.id === req.body.userId);
 
     if (found) {
-      console.log("siii");
+      // console.log("siii");
       const { data } = await axios.post(
         "https://jsonplaceholder.typicode.com/posts",
         req.body
