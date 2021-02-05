@@ -94,7 +94,7 @@ describe("Endpoinmts", () => {
       // quiere decir que no se ha llamado
       expect(axios.post.mock.calls).toEqual([]);
       // res va a retornar un error generico 500
-      expect(res.sendStatus.mock.calls).toEqual([[500]]);
+      expect(res.sendStatus.mock.calls).toEqual([[400]]);
     });
   });
 });

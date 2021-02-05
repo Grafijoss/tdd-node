@@ -8,7 +8,7 @@ describe("Middlewares", () => {
       // implementamos el objeto request solo con el metodo header
       // el caso exitodo es que responda con 1
       const req = {
-        header: jest.fn().mockReturnValue("1"),
+        header: jest.fn().mockReturnValue(1),
       };
       // implementamos el objeto response con el metodo senEstatus
       // senStatus es un espia
@@ -30,7 +30,7 @@ describe("Middlewares", () => {
 
     it("it shouls fail if user is not the one with id 1", () => {
       const req = {
-        header: jest.fn().mockReturnValue("2"),
+        header: jest.fn().mockReturnValue(2),
       };
       const res = {
         sendStatus: jest.fn(),

@@ -4,6 +4,7 @@ module.exports = ({ axios }) => ({
       "https://jsonplaceholder.typicode.com/users"
     );
     // console.log(users.find((x) => x.id === req.body.userId));
+    // console.log(users);
     const found = users.find((x) => x.id === req.body.userId);
 
     if (found) {
@@ -16,6 +17,6 @@ module.exports = ({ axios }) => ({
       return res.status(201).send(data);
     }
     console.log(res.sendStatus);
-    res.sendStatus(500);
+    res.sendStatus(400);
   },
 });

@@ -2,6 +2,7 @@ const express = require("express");
 const axios = require("axios");
 const bodyParser = require("body-parser");
 const { posts } = require("./src/endpoints");
+const { authenticate } = require("./src/middlewares");
 const app = express();
 const port = 3000;
 
@@ -27,7 +28,7 @@ app.use(bodyParser.json());
 // de esta forma podemos cuando hagamos pruebas
 // vamos ainyectar axios y no tenemos que hacer un llamado real
 
-const postsHandlers = users({ axios });
+const postsHandlers = posts({ axios });
 
 // cada ruta tiene este handler
 // handler o controller
